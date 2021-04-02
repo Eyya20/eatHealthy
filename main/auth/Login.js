@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { View } from 'react-native';
 import { LoginButton, AccessToken } from 'react-native-fbsdk';
 import { GoogleSignin, GoogleSigninButton, statusCodes } from 'react-native-google-signin';
-
+import Signin from '././Facebook/Signin'
 export default class Login extends Component {
      constructor(props){
           super(props);
@@ -37,21 +37,7 @@ render() {
       alignItems:"center"
       }}>
       
-      <LoginButton
-           onLoginFinished={(error, result) => {
-              if (error) {
-               console.log("login has error: " + result.error);
-              }
-              else if (result.isCancelled) {
-               console.log("login is cancelled.");
-              } else {
-               AccessToken.getCurrentAccessToken().then(
-                (data) => {console.log(data.accessToken.toString()
-                )
-              })}
-              }
-              }
-           onLogoutFinished={() => console.log("logout.")} />
+    <Signin/>
        <GoogleSigninButton
         style={{ width: 192, height: 55 }}
         size={GoogleSigninButton.Size.Wide}
