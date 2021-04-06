@@ -1,8 +1,13 @@
+const mongoose = require('mongoose');
 import React, { Component } from 'react';
 import { View } from 'react-native';
 import { LoginButton, AccessToken } from 'react-native-fbsdk';
 import { GoogleSignin, GoogleSigninButton, statusCodes } from 'react-native-google-signin';
-import Signin from '././Facebook/Signin'
+import Signin from '../Facebook/Signin'
+require('./User')
+
+var User = mongoose.model('user');
+
 export default class Login extends Component {
      constructor(props){
           super(props);
@@ -25,10 +30,23 @@ signIn = async () => {
         const userInfo = await GoogleSignin.signIn();
            console.log('_____userinfo',userInfo)
            this.setState({ userInfo });
-     } catch (error) {
+   const user = new User({
+         name:userInfo.user.name,
+         email:userInfo.user.email
+      
+     })
+     user.save()
+     .then(data=>{
+         console.log(data)
+         res.send("success")
+     }).catch(err=>{
+         console.log(err)
+     })}catch(error){
          console.log(error)
      }
+     
 }
+
 render() {
    return (
       <View 
