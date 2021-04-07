@@ -1,12 +1,12 @@
-const mongoose = require('mongoose');
+
 import React, { Component } from 'react';
 import { View } from 'react-native';
 import { LoginButton, AccessToken } from 'react-native-fbsdk';
 import { GoogleSignin, GoogleSigninButton, statusCodes } from 'react-native-google-signin';
-import Signin from '../Facebook/Signin'
-require('./User')
+import  axios  from 'axios';
 
-var User = mongoose.model('user');
+import Signin from '../Facebook/Signin'
+
 
 export default class Login extends Component {
      constructor(props){
@@ -29,22 +29,17 @@ signIn = async () => {
         await GoogleSignin.hasPlayServices();
         const userInfo = await GoogleSignin.signIn();
            console.log('_____userinfo',userInfo)
+
            this.setState({ userInfo });
-   const user = new User({
-         name:userInfo.user.name,
-         email:userInfo.user.email
-      
-     })
-     user.save()
-     .then(data=>{
-         console.log(data)
-         res.send("success")
-     }).catch(err=>{
-         console.log(err)
-     })}catch(error){
+
+           let sendBackend = await axios.post("http://192.168.43.91:3000/api/user/create",{"email":userInfo.user.email,"givenName":userInfo.user.givenName,"familyName":userInfo.user.familyName }
+           )
+
+            console.log(sendBackend.data) 
+
+             }catch(error){
          console.log(error)
-     }
-     
+     }  
 }
 
 render() {
