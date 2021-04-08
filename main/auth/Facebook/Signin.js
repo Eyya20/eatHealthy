@@ -7,7 +7,7 @@ import {
   GraphRequestManager,
 } from 'react-native-fbsdk';
 
-export default class Login extends Component {
+export default class Signin extends Component {
   state = {userInfo: {}};
 
   getInfoFromToken = token => {
@@ -33,7 +33,7 @@ export default class Login extends Component {
 
   render() {
     return (
-      <View style={{flex: 1, margin: 50}}>
+    
         <LoginButton
           onLoginFinished={(error, result) => {
             if (error) {
@@ -54,7 +54,7 @@ export default class Login extends Component {
             Logged in As {this.state.userInfo.name}
           </Text>
         )}
-      </View>
+      
     );
   }
 }
