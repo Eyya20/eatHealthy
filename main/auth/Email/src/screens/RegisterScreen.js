@@ -11,6 +11,7 @@ import { theme } from '../core/theme'
 import { emailValidator } from '../helpers/emailValidator'
 import { passwordValidator } from '../helpers/passwordValidator'
 import { nameValidator } from '../helpers/nameValidator'
+import  axios  from 'axios';
 
 export default function RegisterScreen({ navigation }) {
   const [name, setName] = useState({ value: '', error: '' })
@@ -32,6 +33,23 @@ export default function RegisterScreen({ navigation }) {
       routes: [{ name: 'Dashboard' }],
     })
   }
+		 registerUser	=async(event)=> {
+				event.preventDefault()
+				const username = document.getElementById('username').value
+				const password = document.getElementById('password').value
+
+			let sendBackend = await axios.post("http://192.168.43.91:3000/api/user/register", {
+				username,
+						password
+				}).then((res) => res.json())
+
+				if (result.status === 'ok') {
+					// everythign went fine
+					alert('Success')
+				} else {
+					alert(result.error)
+				}
+			}
 
   return (
     <Background>

@@ -10,6 +10,7 @@ import BackButton from '../components/BackButton'
 import { theme } from '../core/theme'
 import { emailValidator } from '../helpers/emailValidator'
 import { passwordValidator } from '../helpers/passwordValidator'
+import  axios  from 'axios';
 
 export default function LoginScreen({ navigation }) {
   const [email, setEmail] = useState({ value: '', error: '' })
@@ -28,6 +29,27 @@ export default function LoginScreen({ navigation }) {
       routes: [{ name: 'Dashboard' }],
     })
   }
+
+
+  login= async (event)=> {
+				event.preventDefault()
+				const username = document.getElementById('username').value
+				const password = document.getElementById('password').value
+
+			let sendBackend = await axios.post("http://192.168.43.91:3000/api/user/login", {
+					username,
+						password	}).then((res) => res.json())
+
+				if (result.status === 'ok') {
+					// everythign went fine
+					console.log('Got the token: ', result.data)
+					localStorage.setItem('token', result.data)
+					alert('Success')
+				} else {
+					alert(result.error)
+				}
+			}
+  
 
   return (
     <Background>

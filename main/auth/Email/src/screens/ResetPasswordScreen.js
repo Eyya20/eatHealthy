@@ -6,6 +6,10 @@ import Header from '../components/Header'
 import TextInput from '../components/TextInput'
 import Button from '../components/Button'
 import { emailValidator } from '../helpers/emailValidator'
+import  axios  from 'axios';
+
+
+
 
 export default function ResetPasswordScreen({ navigation }) {
   const [email, setEmail] = useState({ value: '', error: '' })
@@ -18,6 +22,21 @@ export default function ResetPasswordScreen({ navigation }) {
     }
     navigation.navigate('LoginScreen')
   }
+   registerUser= async (event)=> {   
+				event.preventDefault()
+				const password = document.getElementById('password').value
+
+				let sendBackend = await axios.post("http://192.168.43.91:3000/api/user/change",
+				{newpassword: password, token: localStorage.getItem('token')}
+				).then((res) => res.json())
+
+				if (result.status === 'ok') {
+					// everythign went fine
+					alert('Success')
+				} else {
+					alert(result.error)
+				}
+			}
 
   return (
     <Background>

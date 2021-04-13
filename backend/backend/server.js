@@ -6,7 +6,7 @@ const users = require("./routes/user");
 app.use(express.json());
 
 const mongoUri =
-  "mongodb+srv://eya:fccyuKApEx9uFcOF@cluster0.corvb.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
+  "mongodb+srv://eya:0000@cluster0.corvb.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
 mongoose.connect(mongoUri, {
   useNewUrlParser: true,
   useUnifiedTopology: true,

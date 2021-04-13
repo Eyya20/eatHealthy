@@ -3,7 +3,7 @@ import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 
 //importing screen
-import {Splash, Scan, Result} from '../screens';
+import {Splash, Scan, Result} from '../contents';
 
 //making root stack variable
 const RootStack = createStackNavigator();
